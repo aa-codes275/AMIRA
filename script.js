@@ -282,7 +282,11 @@ function toggleCart() {
 function addToCart(id) {
   const p = REAL_PRODUCTS.find(x => String(x.id) === String(id));
   if (!p) return;
-  const price = Number(p.discounted_price || p.price_aqsa);
+
+  // التحقق بشكل صارم: لو فيه سعر خصم أكبر من صفر، استخدمه، غير كده استخدم السعر الأصلي
+  const hasDiscount = p.discounted_price && Number(p.discounted_price) > 0;
+  const price = hasDiscount ? Number(p.discounted_price) : Number(p.price_aqsa);
+
   const existing = cart.find(c => String(c.id) === String(id));
   if (existing) {
     existing.qty = Math.min(existing.qty + 1, 99);
@@ -290,7 +294,7 @@ function addToCart(id) {
     cart.push({
       id: p.id,
       name: p.product_name_ar,
-      price,
+      price: price, // هنا السعر هينزل بالخصم بتاعه بشكل قطعي
       img: p.supreme_image_url,
       qty: 1
     });
@@ -361,6 +365,7 @@ function updateCartUI() {
 }
 
 // ============ CHECKOUT ============
+// ============ CHECKOUT ============
 function openCheckout() {
   if (!cart.length) return showToast('الحقيبة فارغة!', 'circle-exclamation', true);
   try {
@@ -386,8 +391,6 @@ function closeCheckout() {
   modal.classList.remove('open');
   modal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
-  const mf = $('#moyasar-payment-form');
-  if (mf) mf.innerHTML = '';
 }
 
 function readCustomer() {
@@ -413,22 +416,17 @@ function validateCustomer(c) {
 }
 
 function selectedPayMethod() {
-  const r = document.querySelector('input[name="paymethod"]:checked');
-  return r ? r.value : 'cod';
+  // إرجاع 'cod' دائماً وبشكل قطعي لأنها الطريقة الوحيدة المتاحة
+  return 'cod';
 }
 
 function updatePayMethodUI() {
-  const m = selectedPayMethod();
   const lbl = $('#submitLabel');
   if (lbl) {
-    lbl.textContent = m === 'cod'
-      ? 'تأكيد الطلب — الدفع عند الاستلام'
-      : 'الدفع الآن بالبطاقة';
+    // تثبيت النص ليكون دائماً الدفع عند الاستلام
+    lbl.textContent = 'تأكيد الطلب — الدفع عند الاستلام';
   }
-  const mf = $('#moyasar-payment-form');
-  if (m === 'cod' && mf) mf.innerHTML = '';
 }
-
 // ============ MOYASAR (Card only — no Apple Pay) ============
 function initMoyasar(amountHalalas, orderRef, customer) {
   if (!window.Moyasar) {
