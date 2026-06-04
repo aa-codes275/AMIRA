@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>كود QR | Amira للعطور</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Cairo',sans-serif;background:radial-gradient(ellipse at top,rgba(212,175,55,.12),transparent 60%),#0a0a0a;color:#fff;min-height:100vh;display:grid;place-items:center;padding:20px}
+    .qr-card{background:#121212;border:1.5px solid #d4af37;padding:36px 30px;border-radius:20px;text-align:center;max-width:340px;width:100%;box-shadow:0 30px 80px rgba(212,175,55,.2)}
+    .lm{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#f3e5ab,#d4af37,#a8841a);color:#0a0a0a;display:grid;place-items:center;font-family:'Cinzel',serif;font-size:28px;font-weight:800;margin:0 auto 14px}
+    h2{font-family:'Cinzel',serif;color:#d4af37;font-size:24px;margin-bottom:8px}
+    p{color:#a0a0a0;font-size:13.5px;line-height:1.7;margin-bottom:8px}
+    .qr-frame{background:#fff;padding:16px;border-radius:14px;margin:22px auto;display:inline-block}
+    .qr-frame img{display:block;width:200px;height:200px}
+    .tagline{color:#d4af37;font-size:11px;letter-spacing:4px;font-weight:700;margin-top:6px}
+    .icons{display:flex;justify-content:center;gap:14px;margin-top:14px;color:#888;font-size:22px}
+    .icons i:hover{color:#d4af37}
+    @media (max-width:380px){.qr-frame img{width:170px;height:170px}}
+  </style>
+</head>
+<body>
+  <div class="qr-card">
+    <div class="lm">A</div>
+    <h2>Amira للعطور</h2>
+    <p>وجّه كاميرا هاتفك لمسح الكود والدخول إلى المتجر الفاخر</p>
+    <div class="qr-frame">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://amira.sa&color=0a0a0a" alt="QR Code">
+    </div>
+    <div class="tagline">LUXURY EXPERIENCE</div>
+    <div class="icons"><i class="fa-brands fa-apple-pay"></i><i class="fa-brands fa-whatsapp"></i><i class="fa-solid fa-truck-fast"></i></div>
+  </div>
+<script src="logo-loader.js"></script>
+</body>
+</html>

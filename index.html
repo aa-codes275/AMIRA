@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <meta name="description" content="Amira للعطور — عطور سعودية فاخرة، شحن مجاني، دفع آمن عبر Apple Pay." />
+  <title>Amira للعطور | الفخامة السعودية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.moyasar.com/mpf/1.14.0/moyasar.css" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="main-header" id="mainHeader">
+    <a href="#" class="logo-wrapper">
+      <!-- ⚠️ ضع رابط صورتك الشفافة المباشر بدلاً من الرابط التجريبي أدناه -->
+      <img src="5841183152084623454.webp" alt="Amira Perfumes" class="logo-img" onerror="this.style.display='none'">
+      <div class="logo-text-container">
+        <span class="logo-text">Amira</span>
+        <small class="logo-subtext">متجر عطور يقدم تشكيلة فاخرة للرجال والنساء تناسب جميع الأوقات والمناسبات </small>
+      </div>
+    </a>
+    <nav class="main-nav">
+      <a href="#shop">المجموعة</a>
+      <a href="#about"> تفاصيل</a>
+      <a href="#contact">تواصل</a>
+    </nav>
+    <div class="header-actions">
+      <button class="cart-icon" onclick="toggleCart()" aria-label="السلة">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span id="cart-count" class="cart-badge">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="القائمة"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <section class="hero">
+      <div class="slide active" style="background-image:linear-gradient(180deg,rgba(10,10,10,.55),rgba(10,10,10,.9)),url('5841183152544616637_121.jpg');">
+        <div class="hero-content">
+          <span class="badge"><i class="fa-solid fa-crown"></i> إصدار محدود</span>
+          <h1>   <span class="gold-text">  AMIRA</span></h1>
+          <p>متجر عطور يقدم تشكيلة فاخرة للرجال والنساء تناسب جميع الأوقات والمناسبات، مع بكجات توزيعات أنيقة تضم عطر ودهن عطر بجودة عالية وأسعار مناسبة</p>
+          <div class="hero-cta">
+            <a href="#shop" class="btn btn-gold">اكتشف المجموعة <i class="fa-solid fa-arrow-left"></i></a>
+            <a href="#about" class="btn btn-outline">تفاصيل </a>
+          </div>
+        </div>
+      </div>
+    <div class="hero-slides" id="heroSlides">
+      <div class="slide active" style="background-image:linear-gradient(180deg,rgba(10,10,10,.55),rgba(10,10,10,.9)),url('5841183152544616543_120.jpg');">
+        <div class="hero-content">
+          <span class="badge"><i class="fa-solid fa-crown"></i> إصدار محدود</span>
+          <h1>   <span class="gold-text"> عطر شهرزاد </span></h1>
+          <p>عطر أنثوي فاخر بتوليفة ناعمة وجذابة، مثالي للدوام والمناسبات، يمنحك حضورًا راقيًا يدوم طوال اليوم.</p>
+          <div class="hero-cta">
+            <a href="#shop" class="btn btn-gold">اكتشف المجموعة <i class="fa-solid fa-arrow-left"></i></a>
+            <a href="#about" class="btn btn-outline">تفاصيل </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="slide" style="background-image:linear-gradient(180deg,rgba(10,10,10,.5),rgba(10,10,10,.9)),url('5841183152544616544_120.jpg');">
+        <div class="hero-content">
+           <span class="badge"><i class="fa-solid fa-crown"></i> إصدار محدود</span>
+          <h1>   <span class="gold-text">عطر شهريار</span></h1>
+          <p>عطر رجالي قوي وأنيق يعكس الثقة والفخامة، مناسب للاستخدام اليومي والمناسبات الخاصة</p>
+         <div class="hero-cta">
+            <a href="#shop" class="btn btn-gold">اكتشف المجموعة <i class="fa-solid fa-arrow-left"></i></a>
+            <a href="#about" class="btn btn-outline">تفاصيل </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide" style="background-image:linear-gradient(180deg,rgba(10,10,10,.5),rgba(10,10,10,.9)),url('5841183152544616545_121.jpg');">
+        <div class="hero-content">
+           <span class="badge"><i class="fa-solid fa-crown"></i> إصدار محدود</span>
+          <h1>   <span class="gold-text">  عطر كهرمان </span></h1>
+          <p>عطر دافئ وجذاب يناسب الجميع، مثالي للطلاب والموظفين، يمنحك إحساسًا بالراحة والأناقة طوال اليوم.</p>
+         <div class="hero-cta">
+            <a href="#shop" class="btn btn-gold">اكتشف المجموعة <i class="fa-solid fa-arrow-left"></i></a>
+            <a href="#about" class="btn btn-outline">تفاصيل </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide" style="background-image:linear-gradient(180deg,rgba(10,10,10,.5),rgba(10,10,10,.9)),url('5841183152544616546_121.jpg');">
+        <div class="hero-content">
+           <span class="badge"><i class="fa-solid fa-crown"></i> إصدار محدود</span>
+          <h1>   <span class="gold-text">   بكج التوزيعات </span></h1>
+          <p>بكج أنيق للتوزيعات يحتوي على عطر ودهن عطر، مثالي للهدايا والمناسبات بلمسة فاخرة وجذابة.</p>
+         <div class="hero-cta">
+            <a href="#shop" class="btn btn-gold">اكتشف المجموعة <i class="fa-solid fa-arrow-left"></i></a>
+            <a href="#about" class="btn btn-outline">تفاصيل </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slide" style="background-image:linear-gradient(180deg,rgba(10,10,10,.5),rgba(10,10,10,.9)),url('5841183152544616547_120.jpg');">
+        <div class="hero-content">
+          
+        </div>
+      </div>
+    </div>
+    <div class="hero-dots" id="heroDots"></div>
+    <div class="trust-bar">
+      <div><i class="fa-solid fa-shield-halved"></i> دفع آمن 100%</div>
+      <div><i class="fa-solid fa-truck"></i> شحن في  اسرع وقت</div>
+      
+    </div>
+  </section>
+
+  <section class="section how-it-works">
+    <h2 class="section-title">كيف تطلب بسهولة؟</h2>
+    <div class="steps">
+      <div class="step"><div class="step-n">1</div><i class="fa-solid fa-spray-can-sparkles"></i><h3>اختر عطرك</h3><p>تصفّح المجموعة الحصرية.</p></div>
+      <div class="step"><div class="step-n">2</div><i class="fa-solid fa-bag-shopping"></i><h3>أضف للسلة</h3><p>أضف منتجاً أو أكثر.</p></div>
+      <div class="step"><div class="step-n">3</div><i class="fa-brands fa-apple"></i><h3>ادفع بأمان</h3><p>Apple Pay أو الدفع عند الاستلام.</p></div>
+      <div class="step"><div class="step-n">4</div><i class="fa-solid fa-truck-fast"></i><h3>  </h3><p>توصيل سريع لكل المناطق.</p></div>
+    </div>
+  </section>
+
+  <main id="shop" class="products-section section">
+    <div class="section-head">
+      <span class="kicker">المجموعة الحصرية</span>
+      <h2 class="section-title">عطور صُنعت  باعلي جوده</h2>
+      <p class="section-sub">مجموعة محدودة من العطور الفاخرة.</p>
+    </div>
+    <!-- حاوية المنتجات التي سيتم ملؤها تلقائياً من Supabase -->
+    <div class="products-grid" id="products-container">
+      <div class="loader"><div class="spinner"></div><p>جاري تحميل العطور…</p></div>
+    </div>
+  </main>
+
+  <section id="about" class="section about-section">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="kicker">عن الدار</span>
+        <h2>صناعة عطرية بأيادٍ سعودية</h2>
+        <p>تقدّم  <b>Amira</b> "  للعطور.. الفخامة في زجاجة. نقدم لك تشكيلة عطرية ساحرة تناسب الرجال والنساء وتلائم جميع أوقاتك ومناسباتك، صُممت بأعلى معايير الجودة لتضمن لك ثباتاً وفوحاناً يدوم طويلاً. كما نفخر بتقديم بكجات وتوزيعات أنيقة تجمع بين فخامة العطر المبتكر وأصالة دهن العود الفاخر، لتكون الإهداء الأرقى في مناسباتكم السعيدة بأسعار تنافسية تناسب الجميع."</p>
+        <ul class="about-features">
+          <li><i class="fa-solid fa-check"></i> مكوّنات طبيعية فاخرة</li>
+          <li><i class="fa-solid fa-check"></i> تركيبات حصرية لا تُكرّر</li>
+          <li><i class="fa-solid fa-check"></i> تعبئة يدوية فاخرة</li>
+          <li><i class="fa-solid fa-check"></i> ضمان جودة 100%</li>
+        </ul>
+      </div>
+      <div class="about-visual">
+        <div class="about-img" style="background-image:url('5841183152544616637_121.jpg');"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact-section">
+    <div class="section-head center">
+      <span class="kicker">تواصل معنا</span>
+      <h2 class="section-title">نحن هنا لخدمتك</h2>
+    </div>
+    <div class="contact-cards">
+      <a href="#" id="waContact" target="_blank" rel="noopener" class="cc"><i class="fa-brands fa-whatsapp"></i><h3>واتساب</h3><p id="waContactNum">+966 50 000 0000</p></a>
+     <a href="mailto:amira.perfume1@gmail.com" class="cc">
+  <i class="fa-solid fa-envelope"></i>
+  <h3>البريد الإلكتروني</h3>
+  <p>amira.perfume1@gmail.com</p>
+</a>
+      <a href="https://www.tiktok.com/@amira.parfums1" target="_blank" rel="noopener" class="cc">
+  <i class="fa-brands fa-tiktok"></i>
+  <h3>تيك توك</h3>
+  <p>@amira.parfums1</p>
+</a>
+
+<a href="https://www.snapchat.com/@amira.parfums1" target="_blank" rel="noopener" class="cc">
+  <i class="fa-brands fa-snapchat"></i>
+  <h3>سناب شات</h3>
+  <p>@amira.parfums1</p>
+</a>>
+    </div>
+  </section>
+<footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="logo-wrapper">
+          <div class="logo-text-container">
+            <span class="logo-text">Amira</span>
+            <small class="logo-subtext">متجر عطور </small>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:15px">متجر عطور يقدم تشكيلة فاخرة للرجال والنساء تناسب جميع الأوقات والمناسبات، مع بكجات توزيعات أنيقة تضم عطر ودهن عطر بجودة عالية وأسعار مناسبة</p>
+        
+        <p class="muted" style="margin-top: 10px; font-size: 0.85rem; color: #b5a46d;">
+          <i class="fa-solid fa-file-invoice" style="margin-left: 5px;"></i> 
+          السجل التجاري: <span style="color: #fff;">1009150082</span>
+        </p>
+      </div>
+      
+      <div>
+        <h4>روابط سريعة</h4>
+        <a href="#shop">المجموعة</a>
+        <a href="#about">تفاصيل </a>
+        <a href="#contact">تواصل</a>
+      </div>
+      
+      <div>
+        <h4>طرق الدفع</h4>
+        <div class="pay-icons">
+          <i class="fa-brands fa-apple-pay"></i>
+          <i class="fa-brands fa-cc-visa"></i>
+          <i class="fa-brands fa-cc-mastercard"></i>
+          <i class="fa-solid fa-money-bill-wave" title="عند الاستلام"></i>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">© <span id="year"></span> Amira للعطور · جميع الحقوق محفوظة.</div>
+</footer>
+  <!-- ============ PRODUCT MODAL ============ -->
+  <div class="modal" id="productModal" aria-hidden="true">
+    <div class="modal-backdrop" onclick="closeProductModal()"></div>
+    <div class="modal-content" id="productModalBody"></div>
+  </div>
+
+  <!-- ============ CART ============ -->
+  <div class="cart-backdrop" id="cartBackdrop" onclick="toggleCart()"></div>
+  <aside class="cart-sidebar" id="cartSidebar" aria-hidden="true">
+    <div class="cart-header">
+      <h3><i class="fa-solid fa-bag-shopping"></i> حقيبة التسوق</h3>
+      <button class="close-btn" onclick="toggleCart()" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="empty-cart"><i class="fa-solid fa-bag-shopping"></i><p>الحقيبة فارغة</p><span>أضف عطورك المفضلة وابدأ التسوق</span></div>
+    </div>
+    <div class="cart-footer" id="cartFooter" hidden>
+      <div class="total-row grand"><span>الإجمالي</span><span><b id="cart-total">0.00</b> ر.س</span></div>
+      <button class="btn btn-gold" style="width:100%;margin-top:10px" onclick="openCheckout()">
+        <i class="fa-solid fa-credit-card"></i> إتمام الطلب
+      </button>
+    </div>
+  </aside>
+
+  <!-- ============ CHECKOUT MODAL ============ -->
+  <div class="modal" id="checkoutModal" aria-hidden="true">
+    <div class="modal-backdrop" onclick="closeCheckout()"></div>
+    <div class="modal-content checkout-modal">
+      <button class="modal-close" onclick="closeCheckout()" aria-label="إغلاق"><i class="fa-solid fa-xmark"></i></button>
+      <div class="checkout-wrap">
+        <h2 class="checkout-title"><i class="fa-solid fa-truck-fast"></i> إتمام الطلب</h2>
+        <p class="checkout-sub">يرجى إدخال بيانات الشحن بدقة لضمان وصول طلبك.</p>
+        <form id="checkoutForm" class="co-form" novalidate>
+          <div class="co-grid">
+            <div class="input-group">
+              <label>الاسم الكامل <span class="req">*</span></label>
+              <input type="text" id="c_name" required minlength="3" placeholder="مثال: أحمد محمد">
+            </div>
+            <div class="input-group">
+              <label>رقم الجوال <span class="req">*</span></label>
+              <input type="tel" id="c_phone" required pattern="^(05|5|9665|\+9665)[0-9]{8}$" placeholder="05XXXXXXXX">
+            </div>
+            <div class="input-group">
+              <label>المنطقة / المدينة <span class="req">*</span></label>
+              <select id="c_region" required>
+                <option value="">— اختر المنطقة —</option>
+                <option>الرياض</option><option>جدة</option><option>مكة المكرمة</option>
+                <option>المدينة المنورة</option><option>الدمام</option><option>الخبر</option>
+                <option>الظهران</option><option>الطائف</option><option>تبوك</option>
+                <option>بريدة</option><option>عنيزة</option><option>حائل</option>
+                <option>أبها</option><option>خميس مشيط</option><option>جازان</option>
+                <option>نجران</option><option>الباحة</option><option>عرعر</option>
+                <option>سكاكا</option><option>ينبع</option><option>الجبيل</option>
+                <option>الأحساء</option><option>القطيف</option><option>أخرى</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label>الحي</label>
+              <input type="text" id="c_district" placeholder="مثال: النخيل">
+            </div>
+            <div class="input-group full">
+              <label>العنوان التفصيلي (الشارع) <span class="req">*</span></label>
+              <input type="text" id="c_street" required placeholder="اسم الشارع ورقم المبنى">
+            </div>
+            <div class="input-group">
+              <label>رقم الدور / الشقة</label>
+              <input type="text" id="c_floor" placeholder="الدور الثاني — شقة 5">
+            </div>
+            <div class="input-group">
+              <label>الرمز البريدي</label>
+              <input type="text" id="c_postal" inputmode="numeric" placeholder="12345">
+            </div>
+            <div class="input-group full">
+              <label>ملاحظات إضافية</label>
+              <textarea id="c_notes" rows="2" placeholder="علامة مميزة، وقت تفضيل التسليم..."></textarea>
+            </div>
+          </div>
+          <div class="co-summary">
+            <div class="total-row"><span>عدد المنتجات</span><span id="co-count">0</span></div>
+            <div class="total-row"><span>الشحن</span><span class="gold-text">مجاني</span></div>
+            <div class="total-row grand"><span>الإجمالي</span><span><b id="co-total">0.00</b> ر.س</span></div>
+          </div>
+          <div class="pay-methods">
+            <label class="pay-opt">
+              <input type="radio" name="paymethod" value="applepay" checked>
+              <span class="pay-card">
+                <i class="fa-brands fa-apple-pay"></i>
+                <b>Apple Pay / بطاقة</b>
+                <small>دفع آمن عبر Moyasar</small>
+              </span>
+            </label>
+            <label class="pay-opt">
+              <input type="radio" name="paymethod" value="cod">
+              <span class="pay-card">
+                <i class="fa-solid fa-money-bill-wave"></i>
+                <b>الدفع عند الاستلام</b>
+                <small>تأكيد عبر واتساب</small>
+              </span>
+            </label>
+          </div>
+          <div id="moyasar-payment-form"></div>
+          <button type="submit" class="btn btn-gold checkout-submit" id="checkoutSubmit">
+            <i class="fa-solid fa-check-circle"></i> <span id="submitLabel">تأكيد ودفع</span>
+          </button>
+          <p class="checkout-note"><i class="fa-solid fa-lock"></i> دفعك محمي بتشفير SSL وبوابة Moyasar المعتمدة من البنك المركزي السعودي.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- مكتبات الربط المحدثة -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.moyasar.com/mpf/1.14.0/moyasar.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
