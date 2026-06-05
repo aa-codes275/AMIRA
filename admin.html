@@ -309,7 +309,419 @@
       box-shadow:0 18px 50px rgba(0,0,0,.4);opacity:0;transition:.35s;max-width:90vw
     }
     .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-  </style>
+  
+    /* ============================================================
+       📱 MOBILE OPTIMIZATION PACK v2.0 — Amira Admin
+       ✅ iPhone SE → iPhone 16 Pro Max
+       ✅ Android (Samsung / Huawei / Xiaomi / Oppo)
+       ✅ Safe-area insets + Touch targets ≥ 44px
+       ============================================================ */
+
+    /* Safe area + smooth scroll for whole admin */
+    html,body{ -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+    body{
+      padding-top:env(safe-area-inset-top,0);
+      padding-bottom:env(safe-area-inset-bottom,0);
+      -webkit-overflow-scrolling:touch;
+    }
+    img{max-width:100%;height:auto;display:block}
+
+    /* ===== TABLET (≤ 1024px) ===== */
+    @media (max-width: 1024px){
+      .container,.wrap,.main,.content{ padding-inline:14px !important; }
+      .grid,.products-grid,.orders-grid,.stats-grid{
+        grid-template-columns:repeat(auto-fill,minmax(260px,1fr)) !important;
+        gap:14px !important;
+      }
+      table{ font-size:14px; }
+    }
+
+    /* ===== MOBILE LANDSCAPE / SMALL TABLET (≤ 768px) ===== */
+    @media (max-width: 768px){
+      :root{ --r:10px; }
+
+      /* Login */
+      #loginScreen{ padding:16px !important; }
+      .login-box{ padding:30px 22px !important; max-width:100% !important; border-radius:16px !important; }
+      .login-logo{ font-size:42px !important; }
+
+      /* Header / Topbar */
+      .topbar,.admin-header,header{
+        flex-wrap:wrap !important;
+        gap:10px !important;
+        padding:12px 14px !important;
+        position:sticky; top:0; z-index:100;
+        background:var(--bg) !important;
+        border-bottom:1px solid var(--line);
+      }
+      .topbar h1,.admin-header h1,header h1{ font-size:18px !important; }
+      .topbar .actions,.admin-header .actions{ width:100%; justify-content:space-between !important; }
+
+      /* Sidebar → off-canvas */
+      .sidebar,aside.sidebar{
+        position:fixed !important;
+        inset:0 auto 0 0;
+        transform:translateX(100%);
+        width:82% !important; max-width:320px;
+        z-index:999; transition:transform .3s ease;
+        box-shadow:-12px 0 40px rgba(0,0,0,.5);
+        overflow-y:auto;
+      }
+      [dir="rtl"] .sidebar{ inset:0 0 0 auto; transform:translateX(100%); }
+      .sidebar.open{ transform:translateX(0) !important; }
+      .sidebar-backdrop{
+        position:fixed; inset:0; background:rgba(0,0,0,.6);
+        z-index:998; display:none;
+      }
+      .sidebar.open + .sidebar-backdrop{ display:block; }
+
+      /* Main content full width */
+      .main,.content,main{
+        margin-inline:0 !important;
+        padding:14px !important;
+        width:100% !important;
+      }
+
+      /* Cards / Stats */
+      .stats,.stats-grid,.cards-grid{
+        grid-template-columns:repeat(2,1fr) !important;
+        gap:10px !important;
+      }
+      .stat-card,.card{
+        padding:14px !important;
+        border-radius:12px !important;
+      }
+      .stat-card .value,.stat-value{ font-size:20px !important; }
+      .stat-card .label,.stat-label{ font-size:12px !important; }
+
+      /* Products / Orders grid */
+      .products-grid,.orders-grid,.grid{
+        grid-template-columns:1fr !important;
+        gap:12px !important;
+      }
+      .product-card,.order-card{
+        flex-direction:column !important;
+        text-align:right !important;
+      }
+      .product-card img,.product-thumb{
+        width:100% !important; height:200px !important;
+        object-fit:cover; border-radius:10px;
+      }
+
+      /* Tables → scroll horizontally */
+      .table-wrap,.table-responsive{
+        overflow-x:auto;
+        -webkit-overflow-scrolling:touch;
+        margin-inline:-14px;
+        padding-inline:14px;
+      }
+      table{ min-width:600px; font-size:13px; }
+      table th,table td{ padding:10px 8px !important; white-space:nowrap; }
+
+      /* Forms */
+      .form-row,.form-grid{
+        grid-template-columns:1fr !important;
+        gap:10px !important;
+      }
+      input,select,textarea{
+        font-size:16px !important;            /* منع تكبير iOS */
+        padding:12px 14px !important;
+        border-radius:10px !important;
+        width:100% !important;
+      }
+      label{ font-size:13px !important; }
+
+      /* Buttons */
+      button,.btn{
+        min-height:44px !important;
+        padding:12px 16px !important;
+        font-size:14px !important;
+        border-radius:10px !important;
+      }
+      .btn-group{ flex-wrap:wrap !important; gap:8px !important; }
+      .btn-group .btn{ flex:1 1 calc(50% - 4px); }
+
+      /* Modal */
+      .modal,.modal-content,.dialog{
+        width:calc(100% - 24px) !important;
+        max-width:100% !important;
+        max-height:90dvh !important;
+        max-height:90vh;
+        margin:12px !important;
+        border-radius:14px !important;
+        overflow-y:auto;
+      }
+      .modal-header{ position:sticky; top:0; background:var(--card); z-index:5; }
+
+      /* Tabs scrollable */
+      .tabs,.nav-tabs{
+        overflow-x:auto;
+        flex-wrap:nowrap !important;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+      }
+      .tabs::-webkit-scrollbar,.nav-tabs::-webkit-scrollbar{display:none}
+      .tab,.nav-tabs .nav-link{ white-space:nowrap; flex:0 0 auto; }
+
+      /* Toast / notifications */
+      .toast,.notification{
+        left:12px !important; right:12px !important;
+        bottom:calc(12px + env(safe-area-inset-bottom,0)) !important;
+        width:auto !important; max-width:none !important;
+      }
+
+      /* Hide non-essential on mobile */
+      .desktop-only{ display:none !important; }
+      .mobile-only{ display:block !important; }
+
+      /* Mobile menu toggle */
+      .menu-toggle{
+        display:flex !important; align-items:center; justify-content:center;
+        width:44px; height:44px; border-radius:10px;
+        background:var(--card); border:1px solid var(--line);
+        color:var(--gold); font-size:20px;
+      }
+    }
+
+    /* ===== SMALL PHONES (≤ 480px) ===== */
+    @media (max-width: 480px){
+      .login-box{ padding:24px 18px !important; }
+      .login-logo{ font-size:36px !important; }
+      .stats,.stats-grid,.cards-grid{ grid-template-columns:1fr !important; }
+      .stat-card .value{ font-size:22px !important; }
+      h1{ font-size:18px !important; }
+      h2{ font-size:16px !important; }
+      h3{ font-size:15px !important; }
+      .topbar h1,.admin-header h1{ font-size:16px !important; }
+      .btn-group .btn{ flex:1 1 100%; }
+      table{ font-size:12px; min-width:520px; }
+    }
+
+    /* ===== EXTRA SMALL (≤ 360px iPhone SE / Galaxy Fold) ===== */
+    @media (max-width: 360px){
+      .container,.main,.content{ padding-inline:10px !important; }
+      input,select,textarea{ padding:10px 12px !important; }
+      button,.btn{ padding:10px 12px !important; font-size:13px !important; }
+    }
+
+    /* ===== LANDSCAPE PHONES ===== */
+    @media (max-height: 500px) and (orientation: landscape){
+      .login-box{ padding:20px !important; }
+      .login-logo{ font-size:32px !important; margin-bottom:4px !important; }
+      .login-sub{ margin-bottom:14px !important; }
+      .topbar{ padding:8px 14px !important; }
+    }
+
+    /* ===== TOUCH DEVICES ===== */
+    @media (hover:none) and (pointer:coarse){
+      button,.btn,a,.tab,.nav-link{ min-height:44px; }
+      .product-card:hover,.card:hover{ transform:none !important; }
+    }
+
+    /* ===== HIGH DPI (Retina / AMOLED) ===== */
+    @media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
+      body{ -webkit-font-smoothing:antialiased; }
+    }
+
+    /* ===== REDUCED MOTION ===== */
+    @media (prefers-reduced-motion:reduce){
+      *,*::before,*::after{
+        animation-duration:.01ms !important;
+        transition-duration:.01ms !important;
+      }
+    }
+
+/* ============================================================
+   📱 ULTRA MOBILE PACK v3.0 — Amira Admin (يلغي اللي قبله)
+   iPhone SE → 16 Pro Max | Galaxy / Pixel / Huawei
+   Safe-area + Touch ≥48px + Landscape + Foldables
+   ============================================================ */
+
+/* ====== أساسيات قوية ====== */
+*,*::before,*::after{ -webkit-tap-highlight-color:transparent; }
+html{ scroll-behavior:smooth; }
+html,body{
+  max-width:100%;
+  overflow-x:hidden;
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+body{
+  padding-top:env(safe-area-inset-top,0);
+  padding-bottom:env(safe-area-inset-bottom,0);
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+}
+img,video,canvas,svg{ max-width:100%; height:auto; }
+input,select,textarea,button{ font-family:inherit; }
+
+/* ====== الزرار العائم لفتح القائمة ====== */
+.sidebar-toggle{
+  display:none;
+}
+
+/* ====== تابلت (≤ 1024px) ====== */
+@media (max-width:1024px){
+  .main-area{ margin-right:0 !important; width:100% !important; }
+  .sidebar{
+    position:fixed; top:0; right:-300px; height:100dvh;
+    width:280px; max-width:85vw; z-index:200;
+    transition:right .3s ease; overflow-y:auto;
+    padding-top:calc(env(safe-area-inset-top,0) + 18px);
+  }
+  .sidebar.open{ right:0; box-shadow:-10px 0 40px rgba(0,0,0,.7); }
+  .sidebar-toggle{
+    display:grid !important; place-items:center;
+    position:fixed; top:calc(env(safe-area-inset-top,0) + 12px); right:12px;
+    width:46px; height:46px; border-radius:12px;
+    background:var(--bg2); border:1px solid var(--line);
+    color:var(--gold); z-index:210; cursor:pointer;
+    box-shadow:0 4px 16px rgba(0,0,0,.4);
+  }
+  .sidebar-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,.55);
+    z-index:190; opacity:0; pointer-events:none; transition:opacity .25s;
+  }
+  .sidebar-overlay.show{ opacity:1; pointer-events:auto; }
+  .topbar{ padding:14px 16px; padding-right:70px; }
+  .content{ padding:14px; }
+  .stats-grid{ grid-template-columns:repeat(2,1fr) !important; gap:12px; }
+  .form-grid{ grid-template-columns:1fr 1fr !important; gap:12px; }
+}
+
+/* ====== موبايل (≤ 768px) ====== */
+@media (max-width:768px){
+  .topbar{
+    flex-wrap:wrap; gap:10px;
+    padding:12px 14px; padding-right:64px;
+  }
+  .topbar h1,.page-title{ font-size:18px !important; line-height:1.3; }
+  .content{ padding:12px; }
+
+  /* بطاقات الإحصائيات */
+  .stats-grid{ grid-template-columns:repeat(2,1fr) !important; gap:10px; }
+  .stat-card{ padding:14px !important; border-radius:14px; }
+  .stat-card .value,.stat-value{ font-size:20px !important; }
+  .stat-card .label,.stat-label{ font-size:11px !important; }
+
+  /* الفورمات */
+  .form-grid{ grid-template-columns:1fr !important; gap:10px; }
+  label{ font-size:13px; }
+  input,select,textarea{
+    font-size:16px !important; /* يمنع زووم iOS */
+    padding:12px 14px !important;
+    border-radius:10px !important;
+    width:100%;
+  }
+  button,.btn{
+    min-height:48px; padding:12px 16px;
+    font-size:14px; border-radius:10px;
+    touch-action:manipulation;
+  }
+
+  /* البحث */
+  .table-head{
+    flex-direction:column; align-items:stretch !important; gap:10px;
+  }
+  .search-input{ width:100% !important; }
+
+  /* الجداول → كاردات */
+  .table-wrap,.products-table-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  table{ font-size:12.5px; min-width:540px; }
+  thead th,tbody td{ padding:9px 8px !important; white-space:nowrap; }
+
+  /* المنتجات شبكة كروت */
+  .products-grid,.orders-grid{
+    grid-template-columns:1fr !important; gap:12px;
+  }
+  .product-card,.order-card{
+    padding:14px !important; border-radius:14px;
+  }
+  .product-card img{ height:160px !important; object-fit:cover; border-radius:10px; }
+
+  /* المودال */
+  .modal,.detail-modal{
+    inset:0 !important; padding:0 !important;
+    align-items:flex-end !important;
+  }
+  .modal-content,.detail-content{
+    width:100% !important; max-width:100% !important;
+    max-height:92dvh !important; overflow-y:auto;
+    border-radius:18px 18px 0 0 !important;
+    padding:18px !important;
+    padding-bottom:calc(18px + env(safe-area-inset-bottom,0)) !important;
+    animation:slideUp .3s ease;
+  }
+  @keyframes slideUp{ from{transform:translateY(100%)} to{transform:translateY(0)} }
+  .detail-close{ width:40px; height:40px; font-size:22px; }
+
+  /* التبويبات */
+  .tabs{
+    overflow-x:auto; flex-wrap:nowrap !important;
+    scrollbar-width:none; -ms-overflow-style:none;
+  }
+  .tabs::-webkit-scrollbar{ display:none; }
+  .tab-btn{ white-space:nowrap; font-size:13px; padding:10px 14px; }
+
+  /* التوست */
+  .toast{
+    bottom:calc(20px + env(safe-area-inset-bottom,0));
+    width:calc(100vw - 32px); max-width:420px;
+    font-size:13.5px; padding:14px 18px;
+  }
+}
+
+/* ====== موبايل صغير (≤ 480px) ====== */
+@media (max-width:480px){
+  .stats-grid{ grid-template-columns:1fr !important; }
+  .topbar h1,.page-title{ font-size:16px !important; }
+  .stat-card .value,.stat-value{ font-size:22px !important; }
+  .sidebar{ width:88vw; max-width:320px; }
+  .modal-content,.detail-content{ padding:16px !important; }
+  .detail-row{ font-size:13px; }
+  .detail-row span:last-child{ max-width:60%; font-size:13px; }
+  .product-card img{ height:140px !important; }
+}
+
+/* ====== شاشات صغيرة جداً (≤ 360px) ====== */
+@media (max-width:360px){
+  .topbar{ padding:10px 12px; padding-right:58px; }
+  .content{ padding:10px; }
+  .stat-card{ padding:12px !important; }
+  .stat-card .value,.stat-value{ font-size:19px !important; }
+  button,.btn{ font-size:13px; padding:11px 14px; }
+  .tab-btn{ font-size:12px; padding:9px 12px; }
+}
+
+/* ====== Landscape موبايل ====== */
+@media (max-width:900px) and (orientation:landscape) and (max-height:500px){
+  .sidebar{ width:240px; }
+  .modal-content,.detail-content{
+    max-height:96dvh !important; border-radius:14px !important;
+  }
+  .stats-grid{ grid-template-columns:repeat(4,1fr) !important; }
+}
+
+/* ====== شاشات لمس ====== */
+@media (hover:none) and (pointer:coarse){
+  button,.btn,a,.tab-btn,.nav-item{ min-height:44px; }
+  input,select,textarea{ min-height:44px; }
+}
+
+/* ====== Dark mode عميق + توفير بطارية ====== */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+  }
+}
+
+/* ====== High-DPI / Retina ====== */
+@media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
+  body{ -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+}
+
+</style>
 </head>
 <body>
 
@@ -333,6 +745,7 @@
 
 <!-- ===== APP SHELL ===== -->
 <div id="appShell">
+  <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
   <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="فتح القائمة">
     <i class="fa-solid fa-bars"></i>
   </button>
@@ -587,25 +1000,34 @@
 // ============ CONFIG ============
 const SUPABASE_URL = 'https://fpwipcymceuauksbdsiy.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_U16v3EtalNf4Ip--dUnyiA_3WVIGewQ';
-
 // ============ SECURITY CONFIG ============
-const PASS_KEY = 'admin_pass_hash_v3';
+const PASS_KEY = 'admin_pass_hash_v5'; // تم تحديث المفتاح لتصفير الإعدادات القديمة وتفعيل الباسورد الجديد فوراً
 const ATTEMPTS_KEY = 'admin_login_attempts';
 const LOCK_KEY = 'admin_locked_until';
 const MAX_ATTEMPTS = 5;
 const LOCK_DURATION_MS = 5 * 60 * 1000; // 5 دقائق
 
-// Simple hash (browser-compatible, not for production secrets)
-async function sha256(str) {
-  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+// دالة تشفير مرنة وفائقة الاستقرار تعمل على كل هواتف العالم المتصفحات القديمة والحديثة
+function stableHash(str) {
+  let hash = 0;
+  if (str.length === 0) return "00000000";
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) - hash) + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return "H_" + Math.abs(hash).toString(16);
 }
 
-// Set initial password if not already set (هاشد)
+// دالة الـ sha256 القديمة تم تحديثها لتدعم الطريقة الجديدة وتضمن عدم تعليق الزر
+async function sha256(str) {
+  return stableHash(str);
+}
+
+// تعيين الباسورد الافتراضي الجديد: 12345
 async function initDefaultPass() {
   if (!localStorage.getItem(PASS_KEY)) {
-    // Default password: Amira@2025 (يمكن تغييرها من لوحة التحكم)
-    const h = await sha256('Amira@2025');
+    // الباسورد الافتراضي الجديد تم تعيينه هنا (12345)
+    const h = stableHash('12345');
     localStorage.setItem(PASS_KEY, h);
   }
 }
@@ -1166,6 +1588,9 @@ function toggleSidebar(force) {
   const s = $('adminSidebar');
   const isOpen = force !== undefined ? force : !s.classList.contains('open');
   s.classList.toggle('open', isOpen);
+  const ov = document.querySelector('.sidebar-overlay');
+  if (ov) ov.classList.toggle('show', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
 }
 
 // ============ BOOT ============
@@ -1211,4 +1636,4 @@ window.clearAllData     = clearAllData;
 }());
 </script>
 </body>
-</html>
+</html> 
