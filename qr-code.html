@@ -40,11 +40,6 @@
       box-shadow:0 8px 30px rgba(212,175,55,.2);border:4px solid var(--gold)
     }
     .qr-wrap img{width:100%;height:100%;object-fit:contain}
-    .qr-placeholder{
-      width:180px;height:180px;display:flex;align-items:center;justify-content:center;
-      flex-direction:column;gap:12px;color:#333
-    }
-    .qr-placeholder svg{width:140px;height:140px}
     .store-name{
       font-size:22px;font-weight:800;
       background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
@@ -77,17 +72,6 @@
     }
     .pay-row i{font-size:26px;color:#bbb}
     .pay-row i.cod-icon{color:#33d27a;font-size:20px}
-    @media print{
-      body{background:#fff;padding:0}
-      .container{box-shadow:none;border:none;background:#fff;color:#000}
-      .link-btn,.store-desc,.divider,.pay-row{display:none}
-      .logo,.store-name{color:#000;-webkit-text-fill-color:#000}
-    }
-    @media (max-width:480px){
-      .container{padding:32px 20px}
-      .logo{font-size:42px}
-      .qr-wrap{width:180px;height:180px}
-    }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
@@ -96,140 +80,47 @@
   <div class="logo">Amira</div>
   <div class="logo-sub">متجر عطور فاخرة</div>
 
-  <!-- QR Code -->
-  <div class="qr-wrap" id="qrWrap">
-    <!-- يمكن استبدال هذا بصورة QR Code الخاصة بك -->
-    <div class="qr-placeholder">
-      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="QR Code">
-        <!-- Pattern: Top-left finder -->
-        <rect x="10" y="10" width="60" height="60" fill="#222" rx="4"/>
-        <rect x="18" y="18" width="44" height="44" fill="#fff" rx="2"/>
-        <rect x="26" y="26" width="28" height="28" fill="#222" rx="2"/>
-        <!-- Pattern: Top-right finder -->
-        <rect x="130" y="10" width="60" height="60" fill="#222" rx="4"/>
-        <rect x="138" y="18" width="44" height="44" fill="#fff" rx="2"/>
-        <rect x="146" y="26" width="28" height="28" fill="#222" rx="2"/>
-        <!-- Pattern: Bottom-left finder -->
-        <rect x="10" y="130" width="60" height="60" fill="#222" rx="4"/>
-        <rect x="18" y="138" width="44" height="44" fill="#fff" rx="2"/>
-        <rect x="26" y="146" width="28" height="28" fill="#222" rx="2"/>
-        <!-- Data modules (decorative pattern) -->
-        <rect x="82" y="10" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="100" y="10" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="118" y="10" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="82" y="28" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="100" y="28" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="82" y="46" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="100" y="46" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="118" y="46" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="82" y="64" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="118" y="64" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="10" y="82" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="28" y="82" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="46" y="82" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="82" y="82" width="8" height="8" fill="#d4af37" rx="1"/>
-        <rect x="100" y="82" width="8" height="8" fill="#d4af37" rx="1"/>
-        <rect x="118" y="82" width="8" height="8" fill="#d4af37" rx="1"/>
-        <rect x="136" y="82" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="154" y="82" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="172" y="82" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="10" y="100" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="46" y="100" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="82" y="100" width="8" height="8" fill="#d4af37" rx="1"/>
-        <rect x="136" y="100" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="172" y="100" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="28" y="118" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="64" y="118" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="100" y="118" width="8" height="8" fill="#d4af37" rx="1"/>
-        <rect x="118" y="118" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="154" y="118" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="82" y="136" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="100" y="136" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="136" y="136" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="172" y="136" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="82" y="154" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="118" y="154" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="154" y="154" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="100" y="172" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="136" y="172" width="8" height="8" fill="#222" rx="1"/>
-        <rect x="172" y="172" width="8" height="8" fill="#222" rx="1"/>
-      </svg>
-    </div>
-  </div>
+  <div class="qr-wrap" id="qrWrap"></div>
 
   <div class="store-name">Amira للعطور</div>
   <div class="store-desc">
     أرقى التشكيلات العطرية الفاخرة للرجال والنساء<br>
-    شحن مجاني · ضمان الجودة · دفع عند الاستلام
+      · ضمان الجودة · دفع عند الاستلام
   </div>
 
   <div class="divider"></div>
 
   <div class="links-grid">
-    <a class="link-btn wa" href="https://wa.me/966558787732" target="_blank" rel="noopener">
-      <i class="fa-brands fa-whatsapp"></i>
-      <span>واتساب</span>
-    </a>
-    <a class="link-btn tk" href="https://www.tiktok.com/@amira.parfums1" target="_blank" rel="noopener">
-      <i class="fa-brands fa-tiktok"></i>
-      <span>تيك توك</span>
-    </a>
-    <a class="link-btn sn" href="https://www.snapchat.com/@amira.parfums1" target="_blank" rel="noopener">
-      <i class="fa-brands fa-snapchat"></i>
-      <span>سناب شات</span>
-    </a>
-    <a class="link-btn em" href="mailto:amira.perfume1@gmail.com">
-      <i class="fa-solid fa-envelope"></i>
-      <span>البريد الإلكتروني</span>
-    </a>
+    <a class="link-btn wa" href="https://wa.me/966558787732" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i><span>واتساب</span></a>
+    <a class="link-btn tk" href="https://www.tiktok.com/@amira.parfums1" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i><span>تيك توك</span></a>
+    <a class="link-btn sn" href="https://www.snapchat.com/@amira.parfums1" target="_blank" rel="noopener"><i class="fa-brands fa-snapchat"></i><span>سناب شات</span></a>
+    <a class="link-btn em" href="mailto:amira.perfume1@gmail.com"><i class="fa-solid fa-envelope"></i><span>البريد الإلكتروني</span></a>
   </div>
 
-  <div class="pay-row" aria-label="طرق الدفع المقبولة">
-    <i class="fa-brands fa-cc-visa" title="Visa"></i>
-    <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
-    <i class="fa-solid fa-money-bill-wave cod-icon" title="دفع عند الاستلام"></i>
-    <span style="font-size:12px">دفع عند الاستلام متاح</span>
-  </div>
+  <div class="pay-row"><i class="fa-brands fa-cc-visa"></i><i class="fa-brands fa-cc-mastercard"></i><i class="fa-solid fa-money-bill-wave cod-icon"></i><span>دفع عند الاستلام متاح</span></div>
 
   <div class="divider"></div>
 
   <div class="footer-note">
     امسح رمز QR للوصول للمتجر<br>
     <strong>amira.perfume1@gmail.com</strong><br>
-    <strong>+966 55 878 7732</strong><br>
-    السجل التجاري: 1009150082
+    <strong>+966 55 878 7732</strong>
   </div>
 </div>
 
 <script>
-  // Auto-set QR image if URL param provided: ?url=...
   (function () {
-    const params = new URLSearchParams(location.search);
-    const qrUrl = params.get('qr');
-    const siteUrl = params.get('url');
-    if (qrUrl) {
-      const wrap = document.getElementById('qrWrap');
-      const img = document.createElement('img');
-      img.src = decodeURIComponent(qrUrl);
-      img.alt = 'QR Code';
-      img.width = 220;
-      img.height = 220;
-      wrap.innerHTML = '';
-      wrap.appendChild(img);
-    }
-    if (siteUrl) {
-      // Could generate QR dynamically via API
-      const apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(decodeURIComponent(siteUrl));
-      const wrap = document.getElementById('qrWrap');
-      const img = document.createElement('img');
-      img.src = apiUrl;
-      img.alt = 'QR Code للمتجر';
-      img.width = 220;
-      img.height = 220;
-      img.onerror = function () { img.style.display = 'none'; };
-      wrap.innerHTML = '';
-      wrap.appendChild(img);
-    }
+    // تم وضع الرابط الخاص بك هنا
+    const myStoreUrl = 'https://aa-codes275.github.io/AMIRA/'; 
+    const apiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(myStoreUrl);
+    
+    const wrap = document.getElementById('qrWrap');
+    const img = document.createElement('img');
+    img.src = apiUrl;
+    img.alt = 'QR Code';
+    img.width = 220;
+    img.height = 220;
+    wrap.appendChild(img);
   }());
 </script>
 </body>
