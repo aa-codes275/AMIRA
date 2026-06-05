@@ -503,13 +503,14 @@ async function saveOrder({ ref, total, paid, method, moyasar_id, customer }) {
     localStorage.setItem('fi_orders', JSON.stringify(orders.slice(0, 500)));
   } catch (_) {}
 }
-
 // ============ WHATSAPP ============
 async function sendWhatsApp({ ref, total, paid, customer, paymentId }) {
+  // 1. تجميع المنتجات بشكل مرتب ومنسق
   const items = cart.map((it, i) =>
-    `${i + 1}. ${it.name} × ${it.qty} = ${fmt(it.price * it.qty)} SAR`
+    `  ${i + 1}. *${it.name}* × ${it.qty} = ${fmt(it.price * it.qty)} SAR`
   ).join('\n');
 
+  // 2. تنسيق العنوان بدقة
   const addr = [
     `المنطقة: ${customer.region}`,
     customer.district ? `الحي: ${customer.district}` : null,
@@ -519,27 +520,33 @@ async function sendWhatsApp({ ref, total, paid, customer, paymentId }) {
     customer.notes ? `ملاحظات: ${customer.notes}` : null
   ].filter(Boolean).join('\n');
 
+  // 3. تحديد نوع الدفع (مدى، فيزا، أو Apple Pay بناءً على بوابة ميسر)
   const payLabel = paid
-    ? `✅ مدفوع بالبطاقة${paymentId ? ` (#${paymentId})` : ''}`
-    : '🟡 الدفع عند الاستلام';
+    ? `✅ مدفوع بالكامل إلكترونياً عبر Moyasar${paymentId ? `\nرقم عملية ميسر: (#${paymentId})` : ''}`
+    : '🟡 الدفع عند الاستلام (COD)';
 
+  // 4. بناء نص الرسالة الفاخرة المرتبة جداً
   const msg =
-`*طلب جديد — ${CONFIG.STORE_NAME}*
-رقم الطلب: *${ref}*
+`*طلب جديد فاخر — ${CONFIG.STORE_NAME}* 💎
+رقم الطلب الفريد: *${ref}*
+----------------------------------
 
-👤 *بيانات العميل:*
+👤 *بيانات العميل الملكية:*
 الاسم: ${customer.name}
 الجوال: ${customer.phone}
 ${addr}
 
-🛍️ *المنتجات:*
+🛍️ *تفاصيل السلة العطرية:*
 ${items}
 
-💰 *الإجمالي:* ${fmt(total)} SAR
-💳 *الدفع:* ${payLabel}
+----------------------------------
+💰 *الإجمالي النهائي:* *${fmt(total)} SAR*
+💳 *حالة وطريقة الدفع:* ${payLabel}
 
+*يرجى ترك هذه الرسالة كما هي لإتمام الشحن الفوري السريع لطلبكم* 🚀
 شكراً لاختياركم ${CONFIG.STORE_NAME} 🌹`;
 
+  // 5. حفظ البيانات في Supabase أولاً لتأمين الطلب في قاعدة البيانات
   try {
     if (supabaseClient) {
       await supabaseClient.from('store_orders').insert({
@@ -560,15 +567,31 @@ ${items}
         status: paid ? 'paid' : 'pending'
       });
     }
-  } catch (e) { console.warn('store_orders insert:', e.message); }
+  } catch (e) { 
+    console.warn('خطأ أثناء الحفظ في Supabase:', e.message); 
+  }
 
-  window.open(`https://wa.me/${encodeURIComponent(CONFIG.WHATSAPP_NUMBER)}?text=${encodeURIComponent(msg)}`, '_blank');
+  // 6. تجهيز الرابط المباشر للواتساب
+  const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`;
 
-  cart = [];
-  saveCart();
-  updateCartUI();
-  closeCheckout();
-  showToast('✓ تم إرسال تفاصيل الطلب عبر واتساب');
+  // 7. فتح الواتساب فوراً (قبل مسح داتا السلة لضمان عدم حدوث تعليق)
+  const whatsappWindow = window.open(whatsappUrl, '_blank');
+  
+  // حل أمان إضافي إذا قام المتصفح بحظر فتح النافذة تلقائياً
+  if (!whatsappWindow || whatsappWindow.closed || typeof whatsappWindow.closed == 'undefined') {
+    // إذا تم حظره كـ Popup، نقوم بالتحويل في نفس الصفحة كحل بديل آمن لتجنب ضياع الطلب
+    window.location.href = whatsappUrl;
+    return; // نوقف الدالة هنا لأن الصفحة ستقوم بالتحويل، وسيتم تفريغ السلة عند العودة أو الاعتماد على تحديث الصفحة
+  }
+
+  // 8. الآن، بعد الاطمئنان أن الرابط فتح بنجاح، نقوم بتفريغ السلة وتحديث الواجهة للعميل
+  setTimeout(() => {
+    cart = [];
+    saveCart();
+    updateCartUI();
+    closeCheckout();
+    showToast('✓ تم تأكيد الطلب وفتح واتساب لإرسال التفاصيل الفاخرة');
+  }, 300); // تأخير بسيط جداً (300 مللي ثانية) لضمان استقرار عملية الفتح
 }
 
 // ============ LIVE STORE (Supabase) ============
