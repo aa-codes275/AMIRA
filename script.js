@@ -1,5 +1,5 @@
 /* =========================================================
-   Amira للعطور — Frontend Logic v2.0
+   Amira للعطور — Frontend Logic v2.0 (UPDATED & COMPLETE)
    - Supabase products + orders
    - Moyasar Card (بدون Apple Pay)
    - WhatsApp confirmation (COD & Card)
@@ -68,7 +68,6 @@ function safeText(el, text) {
 function showToast(msg, icon = 'circle-check', isErr = false) {
   const t = $('#toast');
   if (!t) return;
-  // Use textContent for user-visible text, icon via class
   t.innerHTML = `<i class="fa-solid fa-${escHtml(icon)}"></i> `;
   t.appendChild(document.createTextNode(msg));
   t.classList.toggle('err', isErr);
@@ -122,7 +121,6 @@ function initHero() {
   function startAuto() {
     autoTimer = setInterval(() => goSlide(idx + 1), 6000);
   }
-  // Pause on user interaction
   dotsBox.addEventListener('click', () => {
     clearInterval(autoTimer);
     setTimeout(startAuto, 10000);
@@ -153,7 +151,6 @@ function initHeader() {
     }));
   }
 
-  // WhatsApp link
   const wa = $('#waContact');
   if (wa) {
     wa.href = `https://wa.me/${encodeURIComponent(CONFIG.WHATSAPP_NUMBER)}`;
@@ -188,8 +185,8 @@ function renderProducts() {
   }
   c.innerHTML = REAL_PRODUCTS.map((p, i) => {
     const price = fmt(p.price_aqsa);
-    const oldPrice = p.discounted_price ? fmt(p.price_aqsa) : null;
-    const displayPrice = p.discounted_price ? fmt(p.discounted_price) : price;
+    const oldPrice = p.discounted_price && Number(p.discounted_price) > 0 ? fmt(p.price_aqsa) : null;
+    const displayPrice = p.discounted_price && Number(p.discounted_price) > 0 ? fmt(p.discounted_price) : price;
     const rating = Math.min(5, Math.max(0, Number(p.rating) || 4.7));
     const img = escHtml(p.supreme_image_url || 'https://via.placeholder.com/600x600?text=Perfume');
     const name = escHtml(p.product_name_ar || '');
@@ -210,7 +207,7 @@ function renderProducts() {
           <p class="product-desc">${desc}</p>
           <div class="price-row">
             <span class="price">${displayPrice}<small> SAR</small></span>
-            ${oldPrice && p.discounted_price ? `<span class="price-old">${oldPrice} SAR</span>` : ''}
+            ${oldPrice ? `<span class="price-old">${oldPrice} SAR</span>` : ''}
             ${discount > 0 ? `<span class="price-badge">خصم ${discount}%</span>` : ''}
           </div>
         </div>
@@ -229,7 +226,7 @@ function renderProducts() {
 function openProductModal(id) {
   const p = REAL_PRODUCTS.find(x => String(x.id) === String(id));
   if (!p) return;
-  const displayPrice = p.discounted_price ? fmt(p.discounted_price) : fmt(p.price_aqsa);
+  const displayPrice = p.discounted_price && Number(p.discounted_price) > 0 ? fmt(p.discounted_price) : fmt(p.price_aqsa);
   const rating = Math.min(5, Math.max(0, Number(p.rating) || 4.7));
   const imgUrl = escHtml(p.supreme_image_url || '');
   const name = escHtml(p.product_name_ar || '');
@@ -249,7 +246,7 @@ function openProductModal(id) {
         <p class="desc">${desc}</p>
         <div class="price-row" style="margin-bottom:24px">
           <span class="price">${displayPrice}<small> SAR</small></span>
-          ${p.discounted_price ? `<span class="price-old">${fmt(p.price_aqsa)} SAR</span>` : ''}
+          ${p.discounted_price && Number(p.discounted_price) > 0 ? `<span class="price-old">${fmt(p.price_aqsa)} SAR</span>` : ''}
         </div>
         <button class="btn btn-gold" style="width:100%" onclick="addToCart('${pid}');closeProductModal()">
           <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i> إضافة للحقيبة
@@ -283,7 +280,6 @@ function addToCart(id) {
   const p = REAL_PRODUCTS.find(x => String(x.id) === String(id));
   if (!p) return;
 
-  // التحقق بشكل صارم: لو فيه سعر خصم أكبر من صفر، استخدمه، غير كده استخدم السعر الأصلي
   const hasDiscount = p.discounted_price && Number(p.discounted_price) > 0;
   const price = hasDiscount ? Number(p.discounted_price) : Number(p.price_aqsa);
 
@@ -294,7 +290,7 @@ function addToCart(id) {
     cart.push({
       id: p.id,
       name: p.product_name_ar,
-      price: price, // هنا السعر هينزل بالخصم بتاعه بشكل قطعي
+      price: price,
       img: p.supreme_image_url,
       qty: 1
     });
@@ -365,7 +361,6 @@ function updateCartUI() {
 }
 
 // ============ CHECKOUT ============
-// ============ CHECKOUT ============
 function openCheckout() {
   if (!cart.length) return showToast('الحقيبة فارغة!', 'circle-exclamation', true);
   try {
@@ -416,18 +411,17 @@ function validateCustomer(c) {
 }
 
 function selectedPayMethod() {
-  // إرجاع 'cod' دائماً وبشكل قطعي لأنها الطريقة الوحيدة المتاحة
   return 'cod';
 }
 
 function updatePayMethodUI() {
   const lbl = $('#submitLabel');
   if (lbl) {
-    // تثبيت النص ليكون دائماً الدفع عند الاستلام
     lbl.textContent = 'تأكيد الطلب — الدفع عند الاستلام';
   }
 }
-// ============ MOYASAR (Card only — no Apple Pay) ============
+
+// ============ MOYASAR ============
 function initMoyasar(amountHalalas, orderRef, customer) {
   if (!window.Moyasar) {
     showToast('فشل تحميل بوابة الدفع، يرجى المحاولة لاحقاً', 'circle-xmark', true);
@@ -447,13 +441,12 @@ function initMoyasar(amountHalalas, orderRef, customer) {
     description: `${escHtml(CONFIG.STORE_NAME)} — ${escHtml(orderRef)}`,
     publishable_api_key: CONFIG.MOYASAR_PUBLISHABLE_KEY,
     callback_url: window.location.origin + window.location.pathname + '?order=' + encodeURIComponent(orderRef),
-    methods: ['creditcard', 'stcpay'], // Apple Pay removed
+    methods: ['creditcard', 'stcpay'],
     metadata: {
       order_ref: orderRef,
       customer_name: customer.name,
       customer_phone: customer.phone,
-      customer_address: [customer.region, customer.district, customer.street, customer.floor]
-        .filter(Boolean).join(' - ')
+      customer_address: [customer.region, customer.district, customer.street, customer.floor].filter(Boolean).join(' - ')
     },
     on_completed: function (payment) {
       return saveOrder({
@@ -547,7 +540,6 @@ ${items}
 
 شكراً لاختياركم ${CONFIG.STORE_NAME} 🌹`;
 
-  // Save to store_orders table
   try {
     if (supabaseClient) {
       await supabaseClient.from('store_orders').insert({
@@ -572,7 +564,6 @@ ${items}
 
   window.open(`https://wa.me/${encodeURIComponent(CONFIG.WHATSAPP_NUMBER)}?text=${encodeURIComponent(msg)}`, '_blank');
 
-  // Clear cart
   cart = [];
   saveCart();
   updateCartUI();
@@ -629,12 +620,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initStoreLive();
   updateCartUI();
 
-  // Pay method listeners
   document.querySelectorAll('input[name="paymethod"]').forEach(r => {
     r.addEventListener('change', updatePayMethodUI);
   });
 
-  // Checkout submit
   const form = $('#checkoutForm');
   if (form) {
     form.addEventListener('submit', async (e) => {
@@ -660,7 +649,6 @@ document.addEventListener('DOMContentLoaded', () => {
           return;
         }
 
-        // Card via Moyasar
         if (!CONFIG.MOYASAR_PUBLISHABLE_KEY) {
           showToast('بوابة الدفع غير مفعلة — اختر الدفع عند الاستلام', 'triangle-exclamation', true);
           await saveOrder({ ref, total, paid: false, method: 'pending', customer: c });
