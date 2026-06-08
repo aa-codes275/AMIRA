@@ -1,29 +1,17 @@
-/* ============================================================
-   Amira للعطور — Master Stylesheet v3.0 FINAL
-   ✅ iPhone 5 → iPhone 16 Pro Max
-   ✅ Android 4.4+ → Android 15
-   ✅ Samsung, Huawei, Xiaomi, Oppo, Vivo
-   ✅ Safe-area insets (notch / Dynamic Island)
-   ✅ Dynamic viewport (dvh) + legacy fallback
-   ✅ Touch-optimized (min 48px tap targets)
-   ✅ Reduced-motion, prefers-color-scheme
-   ✅ RTL Arabic (dir=rtl)
-   ============================================================ */
 
-/* ── 0. DEVICE NORMALIZE ─────────────────────────────────── */
 *,*::before,*::after{
   -webkit-box-sizing:border-box;
   box-sizing:border-box;
   margin:0;padding:0;
-  -webkit-tap-highlight-color:transparent;      /* remove grey flash on tap (iOS/Android) */
-  -webkit-touch-callout:none;                    /* disable long-press menu on images */
+  -webkit-tap-highlight-color:transparent;      
+  -webkit-touch-callout:none;                    
 }
 html{
   scroll-behavior:smooth;
-  -webkit-text-size-adjust:100%;                 /* stop iOS auto-zoom on font < 16px */
+  -webkit-text-size-adjust:100%;
   -moz-text-size-adjust:100%;
   text-size-adjust:100%;
-  height:-webkit-fill-available;                 /* iOS Safari 100vh fix */
+  height:-webkit-fill-available;                
 }
 body{
   font-family:'Cairo',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
@@ -33,13 +21,13 @@ body{
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   min-height:100vh;
-  min-height:-webkit-fill-available;            /* iOS Safari fill */
+  min-height:-webkit-fill-available;           
   overflow-x:hidden;
-  /* safe area bottom (iPhone notch / home bar) */
+  
   padding-bottom:env(safe-area-inset-bottom,0px);
-  /* Prevent font-boosting on Android */
+ 
   max-height:999999px;
-  /* GPU composite layer for smoother scrolling */
+ 
   -webkit-overflow-scrolling:touch;
 }
 img{max-width:100%;display:block;height:auto}
@@ -48,18 +36,18 @@ button{
   font-family:inherit;cursor:pointer;border:0;
   background:none;color:inherit;
   -webkit-appearance:none;-moz-appearance:none;appearance:none;
-  /* min 48px tap target (Google / Apple HIG) */
+ 
   min-height:44px;
 }
 input,select,textarea{
   font-family:inherit;
   -webkit-appearance:none;-moz-appearance:none;appearance:none;
-  border-radius:0;                               /* stop iOS default radius */
-  /* 16px min to prevent iOS auto-zoom */
+  border-radius:0;                              
+
   font-size:16px;
 }
 
-/* ── 1. DESIGN TOKENS ─────────────────────────────────────── */
+
 :root{
   --bg:#0a0a0a;
   --bg-2:#101010;
@@ -80,14 +68,14 @@ input,select,textarea{
   --max:1280px;
   --danger:#c0392b;
   --success:#27ae60;
-  /* Safe areas */
+ 
   --sat:env(safe-area-inset-top,0px);
   --sar:env(safe-area-inset-right,0px);
   --sab:env(safe-area-inset-bottom,0px);
   --sal:env(safe-area-inset-left,0px);
 }
 
-/* ── 2. UTILITIES ─────────────────────────────────────────── */
+
 .gold-text{
   background:var(--grad-gold);
   -webkit-background-clip:text;
@@ -97,7 +85,7 @@ input,select,textarea{
 }
 .req{color:var(--danger)}
 
-/* ── 3. HEADER ────────────────────────────────────────────── */
+
 .main-header{
   position:fixed;
   top:0;left:0;right:0;
@@ -107,7 +95,7 @@ input,select,textarea{
   -webkit-justify-content:space-between;justify-content:space-between;
   gap:20px;
   padding:14px 5%;
-  /* account for iPhone notch */
+ 
   padding-top:calc(14px + var(--sat));
   padding-right:calc(5% + var(--sar));
   padding-left:calc(5% + var(--sal));
@@ -117,7 +105,7 @@ input,select,textarea{
   border-bottom:1px solid var(--line);
   -webkit-transition:padding .3s,background .3s;
   transition:padding .3s,background .3s;
-  /* prevent header from sliding under status bar on scroll */
+
   -webkit-transform:translateZ(0);
   transform:translateZ(0);
 }
@@ -130,7 +118,7 @@ input,select,textarea{
   display:-webkit-flex;display:flex;
   -webkit-align-items:center;align-items:center;
   gap:12px;text-decoration:none;
-  /* ensure minimum tap target */
+ 
   min-height:44px;
 }
 .logo-img{width:48px;height:48px;object-fit:contain;-webkit-user-select:none;user-select:none}
@@ -142,7 +130,7 @@ input,select,textarea{
 .logo-text{
   font-family:'Pinyon Script',Georgia,cursive;
   font-size:38px;font-weight:500;color:var(--gold);line-height:.8;
-  /* GPU layer for smooth animation */
+ 
   -webkit-transform:translateZ(0);transform:translateZ(0);
 }
 .logo-subtext{
@@ -157,7 +145,7 @@ input,select,textarea{
   font-weight:600;font-size:15px;color:var(--text);
   position:relative;padding:6px 0;
   -webkit-transition:color .2s;transition:color .2s;
-  /* ensure tap target */
+
   display:inline-block;min-height:44px;
   display:-webkit-inline-flex;display:inline-flex;
   -webkit-align-items:center;align-items:center;
@@ -202,7 +190,7 @@ input,select,textarea{
   box-shadow:0 3px 10px -3px rgba(212,175,55,.6);
 }
 
-/* Burger — hidden on desktop */
+
 .burger{
   display:none;
   -webkit-flex-direction:column;flex-direction:column;
@@ -226,11 +214,11 @@ input,select,textarea{
 .burger.open span:nth-child(2){opacity:0;-webkit-transform:scaleX(0);transform:scaleX(0)}
 .burger.open span:nth-child(3){-webkit-transform:translateY(-7px) rotate(-45deg);transform:translateY(-7px) rotate(-45deg)}
 
-/* ── 4. HERO ──────────────────────────────────────────────── */
+
 .hero{
   position:relative;
   height:100vh;
-  height:100dvh;                                 /* dynamic viewport — Chrome 108+, Safari 15.4+ */
+  height:100dvh;                                
   min-height:560px;
   overflow:hidden;
 }
@@ -287,7 +275,7 @@ input,select,textarea{
   -webkit-flex-wrap:wrap;flex-wrap:wrap;
 }
 
-/* ── 5. BUTTONS ───────────────────────────────────────────── */
+
 .btn{
   display:-webkit-inline-flex;display:inline-flex;
   -webkit-align-items:center;align-items:center;
@@ -300,7 +288,7 @@ input,select,textarea{
   min-height:48px;white-space:nowrap;
   cursor:pointer;border:0;
   -webkit-appearance:none;appearance:none;
-  /* GPU layer */
+ 
   -webkit-transform:translateZ(0);transform:translateZ(0);
   will-change:transform;
 }
@@ -319,7 +307,7 @@ input,select,textarea{
 .btn-outline:active{background:rgba(212,175,55,.15)}
 .btn-outline:hover{background:rgba(212,175,55,.1)}
 
-/* Hero dots */
+
 .hero-dots{
   position:absolute;bottom:calc(90px + var(--sab));
   left:50%;-webkit-transform:translateX(-50%);transform:translateX(-50%);
@@ -333,7 +321,7 @@ input,select,textarea{
 }
 .hero-dots button.active{background:var(--gold);width:50px}
 
-/* Trust bar */
+
 .trust-bar{
   position:absolute;bottom:0;left:0;right:0;z-index:3;
   background:rgba(10,10,10,.87);
@@ -343,7 +331,7 @@ input,select,textarea{
   -webkit-justify-content:space-around;justify-content:space-around;
   -webkit-flex-wrap:wrap;flex-wrap:wrap;
   gap:8px;padding:12px 5%;
-  /* add home bar padding */
+
   padding-bottom:calc(12px + var(--sab));
   font-size:13px;color:#cfcfcf;
 }
@@ -353,7 +341,7 @@ input,select,textarea{
 }
 .trust-bar i{color:var(--gold)}
 
-/* ── 6. SECTIONS ──────────────────────────────────────────── */
+
 .section{padding:90px 5%;max-width:var(--max);margin:0 auto}
 .section-head{text-align:center;margin-bottom:50px;max-width:700px;margin-inline:auto}
 .kicker{
@@ -365,7 +353,7 @@ input,select,textarea{
 .section-title{color:var(--white);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.2}
 .section-sub{color:var(--muted);margin-top:14px;font-size:15px}
 
-/* ── 7. HOW IT WORKS ──────────────────────────────────────── */
+
 .how-it-works{padding:70px 5%}
 .steps{
   display:-webkit-flex;display:flex;
@@ -395,7 +383,7 @@ input,select,textarea{
 .step h3{color:var(--white);font-size:17px;margin-bottom:6px}
 .step p{color:var(--muted);font-size:13.5px;line-height:1.6}
 
-/* ── 8. PRODUCTS ──────────────────────────────────────────── */
+
 .products-grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
@@ -477,7 +465,7 @@ input,select,textarea{
 .btn-view:active{background:rgba(212,175,55,.25)}
 .btn-view:hover{background:rgba(212,175,55,.2)}
 
-/* Loader */
+
 .loader{grid-column:1/-1;text-align:center;padding:60px 0;color:var(--muted)}
 .spinner{
   width:42px;height:42px;border-radius:50%;
@@ -488,7 +476,7 @@ input,select,textarea{
 @-webkit-keyframes spin{to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
 @keyframes spin{to{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}
 
-/* ── 9. ABOUT ─────────────────────────────────────────────── */
+
 .about-section{padding:90px 5%}
 .about-grid{
   display:grid;grid-template-columns:1fr 1fr;
@@ -515,7 +503,7 @@ input,select,textarea{
 }
 .about-visual{overflow:hidden}
 
-/* ── 10. CONTACT ──────────────────────────────────────────── */
+
 .contact-cards{
   display:grid;grid-template-columns:repeat(4,1fr);
   gap:20px;max-width:1000px;margin:0 auto;
@@ -536,7 +524,7 @@ input,select,textarea{
 .cc h3{color:var(--white);font-size:16px;margin-bottom:6px}
 .cc p{color:var(--muted);font-size:14px}
 
-/* ── 11. FOOTER ───────────────────────────────────────────── */
+
 .footer{
   background:#080808;border-top:1px solid var(--line);
   padding:50px 5% 20px;
@@ -563,7 +551,7 @@ input,select,textarea{
   border-top:1px solid var(--line-soft);padding-top:18px;margin-top:30px;
 }
 
-/* ── 12. CART SIDEBAR ─────────────────────────────────────── */
+
 .cart-backdrop{
   position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1999;
   opacity:0;pointer-events:none;
@@ -583,9 +571,9 @@ input,select,textarea{
   transition:inset-inline-start .4s cubic-bezier(.4,0,.2,1);
   display:-webkit-flex;display:flex;
   -webkit-flex-direction:column;flex-direction:column;
-  /* iOS overscroll fix */
+
   overflow:hidden;
-  /* safe area */
+
   padding-top:var(--sat);
   padding-bottom:var(--sab);
   -webkit-overflow-scrolling:touch;
@@ -612,7 +600,7 @@ input,select,textarea{
 .cart-items{
   -webkit-flex:1;flex:1;overflow-y:auto;
   padding:16px 20px;
-  /* smooth scroll on iOS */
+
   -webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;
 }
@@ -665,14 +653,14 @@ input,select,textarea{
 }
 .total-row b{color:var(--gold);font-size:1.1em}
 
-/* ── 13. MODAL ────────────────────────────────────────────── */
+
 .modal{
   position:fixed;inset:0;z-index:2100;
   display:none;
   -webkit-align-items:center;align-items:center;
   -webkit-justify-content:center;justify-content:center;
   padding:16px;
-  /* safe area */
+  
   padding-top:calc(16px + var(--sat));
   padding-bottom:calc(16px + var(--sab));
 }
@@ -713,7 +701,7 @@ input,select,textarea{
 .modal-close:active{background:var(--gold);color:#0a0a0a}
 .modal-close:hover{background:var(--gold);color:#0a0a0a}
 
-/* ── 14. CHECKOUT ─────────────────────────────────────────── */
+
 .checkout-modal{max-width:680px}
 .checkout-wrap{padding:32px 28px}
 .checkout-title{
@@ -723,7 +711,7 @@ input,select,textarea{
 }
 .checkout-sub{color:var(--muted);font-size:14px;margin-bottom:18px}
 
-/* COD Banner */
+
 .cod-banner{
   display:-webkit-flex;display:flex;
   -webkit-align-items:center;align-items:center;
@@ -755,7 +743,7 @@ input,select,textarea{
 .input-group textarea:focus{
   outline:none;border-color:var(--gold);background:#1f1f1f;
 }
-/* Fix iOS select arrow */
+
 .input-group select{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d4af37'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:left 10px center;background-size:20px;
@@ -764,7 +752,7 @@ input,select,textarea{
 .input-group textarea{resize:vertical;min-height:70px}
 .co-summary{background:#0f0f0f;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 
-/* Payment Options */
+
 .pay-methods{
   display:grid;grid-template-columns:1fr 1fr;gap:10px;
   border:none;padding:0;margin:0;
@@ -788,7 +776,7 @@ input,select,textarea{
 .pay-card i{font-size:26px;color:var(--gold);margin-bottom:4px}
 .pay-card b{font-size:14px;color:var(--white)}
 .pay-card small{font-size:11.5px;color:var(--muted)}
-/* COD card — more prominent */
+
 .pay-cod-card{border-color:rgba(39,174,96,.4);background:rgba(39,174,96,.06)}
 .pay-cod-card i{color:#33d27a}
 .pay-opt input:checked + .pay-card{
@@ -808,14 +796,14 @@ input,select,textarea{
   -webkit-justify-content:center;justify-content:center;gap:6px;
 }
 
-/* Moyasar form */
+
 #moyasar-payment-form{min-height:0;-webkit-transition:all .3s;transition:all .3s}
 #moyasar-payment-form:empty{display:none}
 #moyasar-payment-form .mysr-form{background:#0f0f0f!important;border:1px solid var(--line)!important;border-radius:12px!important;padding:14px!important}
 #moyasar-payment-form input,#moyasar-payment-form .mysr-form-input{background:#1a1a1a!important;color:#fff!important;border-color:#2a2a2a!important;font-size:16px!important}
 #moyasar-payment-form .mysr-form-button,#moyasar-payment-form button[type=submit]{background:var(--grad-gold)!important;color:#0a0a0a!important;font-weight:700!important;border-radius:10px!important}
 
-/* ── 15. TOAST ────────────────────────────────────────────── */
+
 .toast{
   position:fixed;
   bottom:calc(30px + var(--sab));
@@ -842,7 +830,7 @@ input,select,textarea{
 .toast i{color:#1aaf5d}
 .toast.err i{color:var(--danger)}
 
-/* ── 16. SCROLLBAR (Desktop) ──────────────────────────────── */
+
 @media (min-width:769px){
   ::-webkit-scrollbar{width:6px}
   ::-webkit-scrollbar-track{background:var(--bg-2)}
@@ -850,20 +838,17 @@ input,select,textarea{
   ::-webkit-scrollbar-thumb:hover{background:var(--gold)}
 }
 
-/* ══════════════════════════════════════════════════════════
-   ── 17. RESPONSIVE BREAKPOINTS ──────────────────────────
-   ══════════════════════════════════════════════════════════ */
 
-/* Large tablet — 1024px */
+
 @media (max-width:1024px){
   .footer-grid{grid-template-columns:1fr 1fr}
   .about-grid{gap:40px}
   .contact-cards{grid-template-columns:repeat(2,1fr)}
 }
 
-/* Tablet / small laptop — 840px */
+
 @media (max-width:840px){
-  /* Mobile nav drawer */
+ 
   .main-nav{
     position:fixed;top:0;inset-inline-end:-105%;
     width:80%;max-width:340px;
@@ -879,7 +864,7 @@ input,select,textarea{
     border-inline-start:1px solid var(--line);
     padding:80px 24px;
     z-index:99;
-    /* safe area */
+ 
     padding-top:calc(80px + var(--sat));
     padding-bottom:calc(24px + var(--sab));
   }
@@ -902,7 +887,7 @@ input,select,textarea{
   .checkout-wrap{padding:24px 16px}
 }
 
-/* Mobile — 560px */
+
 @media (max-width:560px){
   .main-header{padding:10px 4%;padding-top:calc(10px + var(--sat))}
   .logo-subtext{display:none}
@@ -919,7 +904,7 @@ input,select,textarea{
   .hero-dots{bottom:calc(110px + var(--sab))}
   .trust-bar{font-size:11px;gap:4px;-webkit-flex-wrap:wrap;flex-wrap:wrap}
   .trust-bar div{min-width:48%;font-size:11px}
-  /* Products 2-col on phones */
+ 
   .products-grid{grid-template-columns:repeat(2,1fr);gap:12px}
   .product-body{padding:12px}
   .product-body h3{font-size:14px}
@@ -927,7 +912,7 @@ input,select,textarea{
   .price{font-size:16px}
   .product-actions{padding:0 10px 12px;gap:6px}
   .btn-add{padding:11px 8px;font-size:12.5px;gap:4px}
-  .btn-add i{display:none}   /* hide icon on very small cards */
+  .btn-add i{display:none}  
   .btn-view{width:44px;height:44px}
   .section-title{font-size:1.55rem}
   .step{padding:22px 14px}
@@ -945,7 +930,7 @@ input,select,textarea{
   .footer-grid{gap:20px}
 }
 
-/* Very small phones — 380px */
+
 @media (max-width:380px){
   .products-grid{grid-template-columns:1fr;gap:14px}
   .hero-content h1{font-size:1.5rem}
@@ -956,7 +941,7 @@ input,select,textarea{
   .logo-text{font-size:26px}
 }
 
-/* Landscape phone — avoid tiny hero */
+
 @media (max-height:500px) and (orientation:landscape){
   .hero{height:auto;min-height:400px}
   .hero-content h1{font-size:1.5rem}
@@ -965,7 +950,7 @@ input,select,textarea{
   .hero-dots{bottom:60px}
 }
 
-/* iPhone 5 / SE 1st gen (320px) */
+
 @media (max-width:320px){
   .hero-content h1{font-size:1.3rem}
   .badge{font-size:11px;padding:5px 12px}
@@ -974,8 +959,7 @@ input,select,textarea{
   .price{font-size:15px}
 }
 
-/* ── 18. TOUCH / POINTER FIXES ────────────────────────────── */
-/* Disable hover effects on touch devices (prevents stuck :hover on iOS) */
+
 @media (hover:none),(pointer:coarse){
   .product-card:hover,
   .step:hover,
@@ -990,13 +974,13 @@ input,select,textarea{
     -webkit-transform:none!important;transform:none!important;
     box-shadow:inherit;
   }
-  /* Instead, use :active for immediate feedback */
+
   .btn-gold:active{-webkit-transform:scale(.97)!important;transform:scale(.97)!important}
   .product-card:active{border-color:var(--gold)}
   .cc:active{border-color:var(--gold)}
 }
 
-/* ── 19. REDUCED MOTION ───────────────────────────────────── */
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{
     -webkit-animation-duration:.001ms!important;animation-duration:.001ms!important;
@@ -1006,12 +990,12 @@ input,select,textarea{
   }
 }
 
-/* ── 20. HIGH DPI / RETINA ────────────────────────────────── */
+
 @media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi){
   .product-card img{image-rendering:-webkit-optimize-contrast;image-rendering:crisp-edges}
 }
 
-/* ── 21. PRINT ────────────────────────────────────────────── */
+
 @media print{
   .main-header,.cart-icon,.burger,.hero-dots,.trust-bar,
   .cart-sidebar,.cart-backdrop,.modal,.toast,.btn{display:none!important}
