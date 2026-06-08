@@ -1,12 +1,4 @@
-/* =========================================================
-   Amira للعطور — Frontend Logic v2.0 (UPDATED & COMPLETE)
-   - Supabase products + orders
-   - Moyasar Card (بدون Apple Pay)
-   - WhatsApp confirmation (COD & Card)
-   - SAR currency
-   ========================================================= */
 
-// ============ CONFIG ============
 const DEFAULT_CONFIG = {
   SUPABASE_URL: "https://fpwipcymceuauksbdsiy.supabase.co",
   SUPABASE_ANON_KEY: "sb_publishable_U16v3EtalNf4Ip--dUnyiA_3WVIGewQ",
@@ -38,7 +30,7 @@ const FALLBACK_PRODUCTS = [];
 let REAL_PRODUCTS = [];
 let cart = [];
 
-// Safe cart load with validation
+
 try {
   const raw = localStorage.getItem('fi_cart');
   if (raw) {
@@ -53,7 +45,7 @@ try {
   }
 } catch (_) { cart = []; }
 
-// ============ HELPERS ============
+
 const $ = (s, p = document) => p.querySelector(s);
 const fmt = n => Number(n || 0).toFixed(2);
 const saveCart = () => {
@@ -95,7 +87,7 @@ function starsHTML(r) {
   return `<span class="stars" aria-label="${rating.toFixed(1)} من 5">${html}</span><span>(${rating.toFixed(1)})</span>`;
 }
 
-// ============ HERO ============
+
 function initHero() {
   const slides = document.querySelectorAll('.slide');
   const dotsBox = $('#heroDots');
@@ -128,7 +120,7 @@ function initHero() {
   startAuto();
 }
 
-// ============ HEADER ============
+
 function initHeader() {
   const header = $('#mainHeader');
   if (!header) return;
@@ -159,7 +151,7 @@ function initHeader() {
   }
 }
 
-// ============ PRODUCTS ============
+
 async function fetchProducts() {
   let data = null;
   try {
@@ -266,7 +258,7 @@ function closeProductModal() {
   if (!$('#cartSidebar').classList.contains('open')) document.body.style.overflow = '';
 }
 
-// ============ CART ============
+
 function toggleCart() {
   const sidebar = $('#cartSidebar');
   const backdrop = $('#cartBackdrop');
@@ -360,7 +352,7 @@ function updateCartUI() {
   if (footer) footer.hidden = false;
 }
 
-// ============ CHECKOUT ============
+
 function openCheckout() {
   if (!cart.length) return showToast('الحقيبة فارغة!', 'circle-exclamation', true);
   try {
@@ -421,7 +413,7 @@ function updatePayMethodUI() {
   }
 }
 
-// ============ MOYASAR ============
+
 function initMoyasar(amountHalalas, orderRef, customer) {
   if (!window.Moyasar) {
     showToast('فشل تحميل بوابة الدفع، يرجى المحاولة لاحقاً', 'circle-xmark', true);
@@ -464,7 +456,7 @@ function initMoyasar(amountHalalas, orderRef, customer) {
   return true;
 }
 
-// ============ SAVE ORDER ============
+
 async function saveOrder({ ref, total, paid, method, moyasar_id, customer }) {
   const supabasePayload = {
     id: ref,
@@ -503,14 +495,14 @@ async function saveOrder({ ref, total, paid, method, moyasar_id, customer }) {
     localStorage.setItem('fi_orders', JSON.stringify(orders.slice(0, 500)));
   } catch (_) {}
 }
-// ============ WHATSAPP ============
+
 async function sendWhatsApp({ ref, total, paid, customer, paymentId }) {
-  // 1. تجميع المنتجات بشكل مرتب ومنسق
+ 
   const items = cart.map((it, i) =>
     `  ${i + 1}. *${it.name}* × ${it.qty} = ${fmt(it.price * it.qty)} SAR`
   ).join('\n');
 
-  // 2. تنسيق العنوان بدقة
+ 
   const addr = [
     `المنطقة: ${customer.region}`,
     customer.district ? `الحي: ${customer.district}` : null,
@@ -520,7 +512,7 @@ async function sendWhatsApp({ ref, total, paid, customer, paymentId }) {
     customer.notes ? `ملاحظات: ${customer.notes}` : null
   ].filter(Boolean).join('\n');
 
-  // 3. تحديد نوع الدفع (مدى، فيزا، أو Apple Pay بناءً على بوابة ميسر)
+ 
   const payLabel = paid
     ? `✅ مدفوع بالكامل إلكترونياً عبر Moyasar${paymentId ? `\nرقم عملية ميسر: (#${paymentId})` : ''}`
     : '🟡 الدفع عند الاستلام (COD)';
@@ -546,7 +538,7 @@ ${items}
 *يرجى ترك هذه الرسالة كما هي لإتمام الشحن الفوري السريع لطلبكم* 🚀
 شكراً لاختياركم ${CONFIG.STORE_NAME} 🌹`;
 
-  // 5. حفظ البيانات في Supabase أولاً لتأمين الطلب في قاعدة البيانات
+ 
   try {
     if (supabaseClient) {
       await supabaseClient.from('store_orders').insert({
@@ -571,30 +563,30 @@ ${items}
     console.warn('خطأ أثناء الحفظ في Supabase:', e.message); 
   }
 
-  // 6. تجهيز الرابط المباشر للواتساب
+ 
   const whatsappUrl = `https://wa.me/${CONFIG.WHATSAPP_NUMBER.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`;
 
-  // 7. فتح الواتساب فوراً (قبل مسح داتا السلة لضمان عدم حدوث تعليق)
+ 
   const whatsappWindow = window.open(whatsappUrl, '_blank');
   
-  // حل أمان إضافي إذا قام المتصفح بحظر فتح النافذة تلقائياً
+ 
   if (!whatsappWindow || whatsappWindow.closed || typeof whatsappWindow.closed == 'undefined') {
-    // إذا تم حظره كـ Popup، نقوم بالتحويل في نفس الصفحة كحل بديل آمن لتجنب ضياع الطلب
+   
     window.location.href = whatsappUrl;
-    return; // نوقف الدالة هنا لأن الصفحة ستقوم بالتحويل، وسيتم تفريغ السلة عند العودة أو الاعتماد على تحديث الصفحة
+    return; 
   }
 
-  // 8. الآن، بعد الاطمئنان أن الرابط فتح بنجاح، نقوم بتفريغ السلة وتحديث الواجهة للعميل
+ 
   setTimeout(() => {
     cart = [];
     saveCart();
     updateCartUI();
     closeCheckout();
     showToast('✓ تم تأكيد الطلب وفتح واتساب لإرسال التفاصيل الفاخرة');
-  }, 300); // تأخير بسيط جداً (300 مللي ثانية) لضمان استقرار عملية الفتح
+  }, 300); 
 }
 
-// ============ LIVE STORE (Supabase) ============
+
 async function initStoreLive() {
   if (!supabaseClient) { fetchProducts(); return; }
 
@@ -633,7 +625,7 @@ async function initStoreLive() {
   }
 }
 
-// ============ INIT ============
+
 document.addEventListener('DOMContentLoaded', () => {
   const yearEl = $('#year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
@@ -690,7 +682,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// Expose globals
+
 window.toggleCart       = toggleCart;
 window.addToCart        = addToCart;
 window.changeQty        = changeQty;
